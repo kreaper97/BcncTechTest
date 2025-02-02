@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import com.bcnc.techtest.constants.ErrorConstants;
@@ -31,12 +33,22 @@ public class PriceControllerIntegrationTest {
     
     Long productId = 35455L;
     Long brandId = 1L;
+    
+    String BASE_URL;
+    
+    @BeforeEach
+    void initBaseURL() {
+    	BASE_URL = "http://localhost:" + port + "/api/v1/prices?";
+    }
+    
 
     // Método común para realizar la solicitud y obtener el precio mediante rest
     private void assertPriceForDate(LocalDateTime applicationDate, double expectedPrice) {
+    	
+    	String url = BASE_URL + "applicationDate=" + applicationDate.toString() + 
+                "&productId=" + productId + "&brandId=" + brandId;
         ResponseEntity<PriceResponseDTO> response = restTemplate.getForEntity(
-                "http://localhost:" + port + "/prices?applicationDate=" + applicationDate.toString() + 
-                "&productId=" + productId + "&brandId=" + brandId, 
+        		url, 
                 PriceResponseDTO.class);
 
         assertEquals(200, response.getStatusCode().value());
@@ -84,29 +96,45 @@ public class PriceControllerIntegrationTest {
         // Usamos una fecha en el futuro y un ID de producto y marca inexistentes
         LocalDateTime applicationDate = LocalDateTime.of(2030, 1, 1, 0, 0); // Fecha futura
         
-        ResponseEntity<ErrorDetailsDTO> response = restTemplate.getForEntity(
-        		"http://localhost:" + port + "/prices?applicationDate=" + applicationDate.toString() + 
-                "&productId="+productId+"&brandId="+brandId, 
-                ErrorDetailsDTO.class);
+        String url = BASE_URL 
+        		+ "applicationDate=" + applicationDate.toString() 
+        		+ "&productId=" + productId 
+        		+ "&brandId=" + brandId;
         
-       
+        ResponseEntity<ErrorDetailsDTO> response = restTemplate.exchange(
+        		url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<ErrorDetailsDTO>() {}
+        );
 
         // Verificamos que el código de estado sea 404
         assertEquals(404, response.getStatusCode().value());
 
         // Verificamos que el mensaje de error contenga la razón de la excepción
-        ErrorDetailsDTO responseBody = response.getBody();
-        assertNotNull(responseBody);
-        assertEquals(ErrorConstants.ERROR_NOT_FOUND, responseBody.getError());
-        assertTrue(responseBody.getMessage().contains(ErrorConstants.ERROR_PRICE_NOT_FOUND));
+        ErrorDetailsDTO errorDetails = response.getBody();
+        assertNotNull(errorDetails);
+        assertEquals(ErrorConstants.ERROR_NOT_FOUND, errorDetails.getError());
+        assertTrue(errorDetails.getMessage().contains(ErrorConstants.ERROR_PRICE_NOT_FOUND));
     }
     
     @Test
     public void testMissingProductIdBrandIdShouldReturnBadRequest() {
-        // Usamos una solicitud con un parámetro applicationDate válido, pero sin productId ni brandId        
-        ResponseEntity<ErrorDetailsDTO> response = restTemplate.getForEntity(
-        		"http://localhost:" + port + "/prices?applicationDate=" + LocalDateTime.now().toString(), 
-                ErrorDetailsDTO.class);
+    	// Usamos una fecha en el futuro y un ID de producto y marca inexistentes
+        LocalDateTime applicationDate = LocalDateTime.of(2030, 1, 1, 0, 0); // Fecha futura
+        
+        String url = BASE_URL 
+        		+ "applicationDate=" + applicationDate.toString() 
+        		+ "&productId="
+        		+ "&brandId=";
+        
+        ResponseEntity<ErrorDetailsDTO> response = restTemplate.exchange(
+        		url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<ErrorDetailsDTO>() {}
+        );
+        
         // Verificamos que el código de estado sea 400 (Bad Request)
         assertEquals(400, response.getStatusCode().value());
 
