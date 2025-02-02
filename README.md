@@ -80,10 +80,10 @@ Ejemplo de Respuesta:
 
 ## Errores Comunes
 
-1 - 404 Not Found: Si no se encuentra un precio aplicable para los parámetros proporcionados.
-2 - 400 Bad Request: Si alguno de los parámetros (como applicationDate, productId, o brandId) no es válido o falta.
+1. 404 Not Found: Si no se encuentra un precio aplicable para los parámetros proporcionados.
+2. 400 Bad Request: Si alguno de los parámetros (como applicationDate, productId, o brandId) no es válido o falta.
 
-## Ejemplo de Respuesta de Error (404):
+### Ejemplo de Respuesta de Error (404):
 
 ```json
 {
@@ -94,7 +94,7 @@ Ejemplo de Respuesta:
 }
 ```
 
-## Ejemplo de Respuesta de Error (400):
+### Ejemplo de Respuesta de Error (400):
 
 ```json
 {
