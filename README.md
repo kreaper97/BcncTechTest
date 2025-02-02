@@ -13,7 +13,7 @@ Este es un servicio Spring Boot que proporciona un endpoint REST para consultar 
 
 ## Ejecución
 
-1. Clona el repositorio.
+1. Clona el repositorio `git clone https://github.com/kreaper97/BcncTechTest.git`.
 2. Ejecuta `mvnw clean install` para construir el proyecto.
 3. Ejecuta `mvnw spring-boot:run` para iniciar la aplicación.
 
