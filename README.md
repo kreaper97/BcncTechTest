@@ -98,9 +98,27 @@ Ejemplo de Respuesta:
 
 ### Ejemplo de Respuesta de Error (400):
 
+#### Campos requeridos via REST, curl
+
+```bash
+"http://localhost:8080/api/v1/prices?applicationDate=&productId=&brandId="
+```
+
 ```json
 {
-    "timestamp": "2025-02-02T22:04:02.4800183",
+    "timestamp": "2025-02-02T23:50:04.0233179",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "Required request parameter 'applicationDate' for method parameter type LocalDateTime is present but converted to null"
+}
+```
+
+#### Campos validados via método getApplicablePrice 
+Se valida si algun campo viene nulo para lanzar una excepción
+
+```json
+{
+    "timestamp": "2025-02-02T23:50:04.0233179",
     "status": 400,
     "error": "Bad Request",
     "message": "Application Date, Product ID and Brand ID cannot be null"

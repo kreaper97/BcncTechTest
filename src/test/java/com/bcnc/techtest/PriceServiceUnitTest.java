@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.bcnc.techtest.application.services.PriceService;
 import com.bcnc.techtest.domain.model.PriceResponseDTO;
-import com.bcnc.techtest.domain.ports.in.GetApplicablePricePort;
+import com.bcnc.techtest.domain.ports.in.GetApplicablePriceUCPort;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 public class PriceServiceUnitTest {
 
     @Mock
-    private GetApplicablePricePort getApplicablePricePort;
+    private GetApplicablePriceUCPort getApplicablePriceUCPort;
 
     @InjectMocks
     private PriceService priceService;
@@ -34,7 +34,7 @@ public class PriceServiceUnitTest {
 
         PriceResponseDTO expectedResponse = new PriceResponseDTO(productId, brandId, 1, applicationDate, applicationDate.plusDays(1), 35.50);
 
-        when(getApplicablePricePort.findApplicablePrice(applicationDate, productId, brandId))
+        when(getApplicablePriceUCPort.findApplicablePrice(applicationDate, productId, brandId))
             .thenReturn(Optional.of(expectedResponse));
 
         Optional<PriceResponseDTO> result = priceService.findApplicablePrice(applicationDate, productId, brandId);
@@ -42,6 +42,6 @@ public class PriceServiceUnitTest {
         assertEquals(35.50, result.get().getPrice(), 0.01); // Tolerancia de 0.01 ya que devuelve 35.5
         
         // Verificamos que ha llamado al método
-        verify(getApplicablePricePort).findApplicablePrice(applicationDate, productId, brandId);
+        verify(getApplicablePriceUCPort).findApplicablePrice(applicationDate, productId, brandId);
     }
 }

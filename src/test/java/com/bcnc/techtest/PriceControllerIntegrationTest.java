@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import com.bcnc.techtest.constants.ErrorConstants;
@@ -101,11 +100,9 @@ public class PriceControllerIntegrationTest {
         		+ "&productId=" + productId 
         		+ "&brandId=" + brandId;
         
-        ResponseEntity<ErrorDetailsDTO> response = restTemplate.exchange(
-        		url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<ErrorDetailsDTO>() {}
+        ResponseEntity<ErrorDetailsDTO> response = restTemplate.getForEntity(
+        		url, 
+        		ErrorDetailsDTO.class
         );
 
         // Verificamos que el código de estado sea 404
@@ -128,11 +125,9 @@ public class PriceControllerIntegrationTest {
         		+ "&productId="
         		+ "&brandId=";
         
-        ResponseEntity<ErrorDetailsDTO> response = restTemplate.exchange(
-        		url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<ErrorDetailsDTO>() {}
+        ResponseEntity<ErrorDetailsDTO> response = restTemplate.getForEntity(
+        		url, 
+        		ErrorDetailsDTO.class
         );
         
         // Verificamos que el código de estado sea 400 (Bad Request)
@@ -142,7 +137,7 @@ public class PriceControllerIntegrationTest {
         ErrorDetailsDTO responseBody = response.getBody();
         assertNotNull(responseBody);
         assertEquals(ErrorConstants.ERROR_BAD_REQUEST, responseBody.getError());
-        assertTrue(responseBody.getMessage().contains(ErrorConstants.ERROR_PARAM_NULL));     
+        assertTrue(responseBody.getMessage().contains(ErrorConstants.ERROR_REQUIRED_PARAM));     
     }
 
 }

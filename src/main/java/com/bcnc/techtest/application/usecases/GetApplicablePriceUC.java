@@ -10,16 +10,17 @@ import org.springframework.stereotype.Component;
 
 import com.bcnc.techtest.application.mapper.PriceMapper;
 import com.bcnc.techtest.domain.model.PriceResponseDTO;
-import com.bcnc.techtest.domain.ports.in.GetApplicablePricePort;
+import com.bcnc.techtest.domain.ports.in.GetApplicablePriceUCPort;
 import com.bcnc.techtest.domain.ports.out.PriceDatabasePort;
 import com.bcnc.techtest.infraestructure.entities.Price;
 
 @Component
-public class GetApplicablePriceUC implements GetApplicablePricePort{
+public class GetApplicablePriceUC implements GetApplicablePriceUCPort{
 	
 	@Autowired
 	private PriceDatabasePort priceDatabasePort;
 	
+	@Override
 	public Optional<PriceResponseDTO> findApplicablePrice(LocalDateTime applicationDate, Long productId, Long brandId){
 		 List<Price> prices = priceDatabasePort.findApplicablePrices(applicationDate, productId, brandId);
 		 

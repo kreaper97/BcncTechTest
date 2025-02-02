@@ -5,6 +5,6 @@ import java.util.Optional;
 
 import com.bcnc.techtest.domain.model.PriceResponseDTO;
 
-public interface GetApplicablePricePort{
+public interface GetApplicablePriceUCPort{
 	Optional<PriceResponseDTO> findApplicablePrice(LocalDateTime applicationDate, Long productId, Long brandId);
 }
