@@ -139,5 +139,17 @@ public class PriceControllerIntegrationTest {
         assertEquals(ErrorConstants.ERROR_BAD_REQUEST, responseBody.getError());
         assertTrue(responseBody.getMessage().contains(ErrorConstants.ERROR_REQUIRED_PARAM));     
     }
+    
+    @Test
+    public void testIllegalArgumentExceptionHandler() {
+        String url = BASE_URL; // Sin parámetros para provocar IllegalArgumentException
+
+        ResponseEntity<ErrorDetailsDTO> response = restTemplate.getForEntity(url, ErrorDetailsDTO.class);
+
+        assertEquals(400, response.getStatusCode().value());
+        assertNotNull(response.getBody());
+        assertEquals(ErrorConstants.ERROR_BAD_REQUEST, response.getBody().getError());
+        assertTrue(response.getBody().getMessage().contains(ErrorConstants.ERROR_REQUIRED_PARAM));
+    }
 
 }

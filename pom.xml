@@ -140,6 +140,7 @@
 				    </includes>
 				    <excludes>
 				        <exclude>com/bcnc/techtest/constants/ErrorConstants*</exclude>
+				        <exclude>com/bcnc/techtest/infraestructure/exceptions/BCNCExceptionHandler*</exclude>
 				    </excludes>
 				</configuration>
                 

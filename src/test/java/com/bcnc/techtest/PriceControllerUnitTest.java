@@ -2,6 +2,7 @@ package com.bcnc.techtest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
@@ -12,9 +13,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
 import com.bcnc.techtest.application.services.PriceService;
 import com.bcnc.techtest.constants.ErrorConstants;
+import com.bcnc.techtest.domain.model.PriceResponseDTO;
 import com.bcnc.techtest.infraestructure.controller.PriceController;
 import com.bcnc.techtest.infraestructure.exceptions.PriceNotFoundException;
 
@@ -49,7 +52,7 @@ public class PriceControllerUnitTest {
     @Test
     public void testGetApplicablePriceAllParametersNull() {
         // Llamada al método del controlador y verificación de la excepción
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+    	IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             priceController.getApplicablePrice(null, null, null);
         });
 
@@ -59,7 +62,7 @@ public class PriceControllerUnitTest {
     @Test
     public void testGetApplicablePriceApplicationDateNull() {
         // Llamada al método del controlador y verificación de la excepción
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+    	IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             priceController.getApplicablePrice(null, productId, brandId);
         });
 
@@ -69,7 +72,7 @@ public class PriceControllerUnitTest {
     @Test
     public void testGetApplicablePriceProductIdNull() {
         // Llamada al método del controlador y verificación de la excepción
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+    	IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             priceController.getApplicablePrice(applicationDate, null, brandId);
         });
 
@@ -79,7 +82,7 @@ public class PriceControllerUnitTest {
     @Test
     public void testGetApplicablePriceBrandIdNull() {
         // Llamada al método del controlador y verificación de la excepción
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+    	IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             priceController.getApplicablePrice(applicationDate, productId, null);
         });
 
@@ -99,7 +102,7 @@ public class PriceControllerUnitTest {
     @Test
     public void testGetApplicablePriceApplicationDateAndBrandIdNull() {
         // Llamada al método del controlador y verificación de la excepción
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+    	IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             priceController.getApplicablePrice(null, productId, null);
         });
 
@@ -109,7 +112,7 @@ public class PriceControllerUnitTest {
     @Test
     public void testGetApplicablePriceProductIdAndBrandIdNull() {
         // Llamada al método del controlador y verificación de la excepción
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+    	IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             priceController.getApplicablePrice(applicationDate, null, null);
         });
 
@@ -120,4 +123,26 @@ public class PriceControllerUnitTest {
     	// Verificación del mensaje de la excepción
         assertEquals(ErrorConstants.ERROR_PARAM_NULL, exception.getMessage());
     }
+    
+    @Test
+    public void testGetApplicablePrice_Success() {
+        // Datos de prueba
+        PriceResponseDTO mockResponse = new PriceResponseDTO();
+        mockResponse.setBrandId(brandId);
+        mockResponse.setPrice(35.50);
+        mockResponse.setProductId(productId);
+        mockResponse.setPriceList(1);
+        // Simular que el servicio devuelve un precio
+        when(priceService.findApplicablePrice(applicationDate, productId, brandId))
+            .thenReturn(Optional.of(mockResponse));
+
+        // Llamada al método del controlador
+        ResponseEntity<PriceResponseDTO> response = priceController.getApplicablePrice(applicationDate, productId, brandId);
+
+        // Verificaciones
+        assertEquals(200, response.getStatusCode().value());
+        assertEquals(mockResponse, response.getBody());
+        verify(priceService).findApplicablePrice(applicationDate, productId, brandId);
+    }
+
 }

@@ -22,9 +22,9 @@ public class PriceController {
 
     @GetMapping
     public ResponseEntity<PriceResponseDTO> getApplicablePrice(
-    		@RequestParam() @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime applicationDate,
-    		@RequestParam() Long productId,
-    		@RequestParam() Long brandId) {
+    		@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime applicationDate,
+    		@RequestParam Long productId,
+    		@RequestParam Long brandId) {
 
         if (productId == null || brandId == null || applicationDate == null) {
             throw new IllegalArgumentException(ErrorConstants.ERROR_PARAM_NULL);
