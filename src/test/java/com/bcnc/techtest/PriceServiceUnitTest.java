@@ -38,7 +38,7 @@ public class PriceServiceUnitTest {
             .thenReturn(Optional.of(expectedResponse));
 
         Optional<PriceResponseDTO> result = priceService.findApplicablePrice(applicationDate, productId, brandId);
-
+        
         assertEquals(35.50, result.get().getPrice(), 0.01); // Tolerancia de 0.01 ya que devuelve 35.5
         
         // Verificamos que ha llamado al método

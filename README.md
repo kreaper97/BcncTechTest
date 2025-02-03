@@ -13,6 +13,12 @@ Este es un servicio Spring Boot que proporciona un endpoint REST para consultar 
 - Jacoco (Cobertura de Código)
 - JUnit 5 y Mockito (Pruebas Unitarias y de Integración)
 
+## Patrones
+
+- Inyección de Dependencias: Facilita la gestión de dependencias y el desacoplamiento del código.
+- Singleton: Asegura que ciertas clases como los servicios y repositorios sean instanciadas solo una vez.
+- Estrategia: Selección dinámica de comportamientos o algoritmos, como en la selección de precios según prioridad.
+
 ## Ejecución
 
 1. Clona el repositorio `git clone https://github.com/kreaper97/BcncTechTest.git`.
