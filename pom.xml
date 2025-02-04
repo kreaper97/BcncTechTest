@@ -144,8 +144,8 @@
 				        <include>com/bcnc/techtest/**</include>
 				    </includes>
 				    <excludes>
-				        <exclude>com/bcnc/techtest/constants/ErrorConstants*</exclude>
-				        <exclude>com/bcnc/techtest/infraestructure/exceptions/BCNCExceptionHandler*</exclude>
+				        <exclude>com/bcnc/techtest/common/ErrorConstants*</exclude>
+				        <exclude>com/bcnc/techtest/common/exceptions/BCNCExceptionHandler*</exclude>
 				    </excludes>
 				</configuration>
                 

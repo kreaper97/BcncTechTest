@@ -15,11 +15,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
-import com.bcnc.techtest.application.services.PriceService;
-import com.bcnc.techtest.constants.ErrorConstants;
-import com.bcnc.techtest.domain.model.PriceResponseDTO;
-import com.bcnc.techtest.infraestructure.controller.PriceController;
-import com.bcnc.techtest.infraestructure.exceptions.PriceNotFoundException;
+import com.bcnc.techtest.common.ErrorConstants;
+import com.bcnc.techtest.common.exceptions.PriceNotFoundException;
+import com.bcnc.techtest.features.prices.domain.model.PriceResponseDTO;
+import com.bcnc.techtest.features.prices.domain.services.PriceService;
+import com.bcnc.techtest.features.prices.infraestructure.PriceController;
 
 @ExtendWith(MockitoExtension.class)
 public class PriceControllerUnitTest {

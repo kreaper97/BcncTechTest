@@ -16,9 +16,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
-import com.bcnc.techtest.constants.ErrorConstants;
-import com.bcnc.techtest.domain.model.ErrorDetailsDTO;
-import com.bcnc.techtest.domain.model.PriceResponseDTO;
+import com.bcnc.techtest.common.ErrorConstants;
+import com.bcnc.techtest.common.exceptions.ErrorDetailsDTO;
+import com.bcnc.techtest.features.prices.domain.model.PriceResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest(classes = BCNCApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

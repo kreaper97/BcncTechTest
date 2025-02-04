@@ -6,9 +6,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.bcnc.techtest.application.services.PriceService;
-import com.bcnc.techtest.domain.model.PriceResponseDTO;
-import com.bcnc.techtest.domain.ports.in.GetApplicablePriceUCPort;
+import com.bcnc.techtest.features.prices.application.ports.in.GetApplicablePriceUCPort;
+import com.bcnc.techtest.features.prices.domain.model.PriceResponseDTO;
+import com.bcnc.techtest.features.prices.domain.services.PriceService;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
