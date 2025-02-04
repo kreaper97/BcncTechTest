@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 import com.bcnc.techtest.features.brands.infraestructure.Brand;
+import com.bcnc.techtest.features.products.infraestructure.Product;
 
 
 @Entity
@@ -20,12 +21,15 @@ public class Price {
 
     @ManyToOne
     @JoinColumn(name = "brand_id", nullable = false)
-    private Brand brand; // Relación con Brand
+    private Brand brand;
+    
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Integer priceList;
-    private Long productId;
     private Integer priority;
     private Double price;
     private String currency;

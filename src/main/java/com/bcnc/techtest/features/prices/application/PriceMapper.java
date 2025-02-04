@@ -7,7 +7,7 @@ public interface PriceMapper {
 
 	public static PriceResponseDTO toPriceResponseDto(Price price) {
         return new PriceResponseDTO(
-                price.getProductId(),
+                price.getProduct().getId(),
                 price.getBrand().getId(),
                 price.getPriceList(),
                 price.getStartDate(),

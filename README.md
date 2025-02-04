@@ -7,9 +7,10 @@ Este es un servicio Spring Boot que proporciona un endpoint REST para consultar 
 - Spring Boot
 - Java 17
 - Arquitectura Hexagonal (Puertos y Adaptadores)
+- Vertical Slicing
 - H2 Database (en memoria)
 - Lombok (Getters, Setters y Constructores)
-- JPA (Java Persistence API)
+- Spring Data - JPA (Java Persistence API)
 - Jacoco (Cobertura de Código)
 - JUnit 5 y Mockito (Pruebas Unitarias y de Integración)
 

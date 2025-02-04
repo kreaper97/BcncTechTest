@@ -3,6 +3,11 @@ CREATE TABLE IF NOT EXISTS BRAND (
     name VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS PRODUCT (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS PRICE (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     brand_id BIGINT NOT NULL,
@@ -13,11 +18,19 @@ CREATE TABLE IF NOT EXISTS PRICE (
     priority INT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     currency VARCHAR(3) NOT NULL,
-    CONSTRAINT fk_brand FOREIGN KEY (brand_id) REFERENCES BRAND(id)
+    CONSTRAINT fk_brand FOREIGN KEY (brand_id) REFERENCES BRAND(id),
+    CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES PRODUCT(id)
 );
 
 -- Insertar la marca (ejemplo: ZARA)
 INSERT INTO BRAND (id, name) VALUES (1, 'ZARA');
+
+-- Insertar productos
+INSERT INTO PRODUCT (id, name) VALUES (35455, 'Camiseta de Algodón');
+INSERT INTO PRODUCT (id, name) VALUES (67890, 'Pantalón Vaquero');
+INSERT INTO PRODUCT (id, name) VALUES (12345, 'Chaqueta de Cuero');
+INSERT INTO PRODUCT (id, name) VALUES (98765, 'Zapatos Deportivos');
+INSERT INTO PRODUCT (id, name) VALUES (54321, 'Bolso de Cuero');
 
 -- Insertar precios asociados a ZARA
 INSERT INTO PRICE (id, brand_id, product_id, start_date, end_date, price_list, priority, price, currency) VALUES
