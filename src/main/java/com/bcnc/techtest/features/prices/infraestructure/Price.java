@@ -31,6 +31,6 @@ public class Price {
     private LocalDateTime endDate;
     private Integer priceList;
     private Integer priority;
-    private Double price;
+    private Double precio; //price es la clase
     private String currency;
 }

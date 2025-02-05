@@ -19,7 +19,6 @@ import com.bcnc.techtest.features.prices.infraestructure.Price;
 @Service
 public class GetApplicablePriceUC implements GetApplicablePriceUCPort{
 	
-	@Autowired
 	private PriceDatabasePort priceDatabasePort;
 	
 	@Override
@@ -29,5 +28,10 @@ public class GetApplicablePriceUC implements GetApplicablePriceUCPort{
 		 return prices.stream()
 	        		.max(Comparator.comparing(Price::getPriority)) // Devuelve el de maxima prioridad
 	        		.map(PriceMapper::toPriceResponseDto); // Convertimos la entity Price en el DTO de respuesta con los campos necesarios
+	}
+	
+	@Autowired
+	public void setPriceDatabasePort(PriceDatabasePort priceDatabasePort) {
+		this.priceDatabasePort = priceDatabasePort;
 	}
 }

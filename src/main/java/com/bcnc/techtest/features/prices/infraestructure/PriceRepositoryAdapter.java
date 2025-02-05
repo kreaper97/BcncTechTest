@@ -1,6 +1,5 @@
 package com.bcnc.techtest.features.prices.infraestructure;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,6 @@ import java.util.List;
 @Component
 public class PriceRepositoryAdapter implements PriceDatabasePort {
 	
-    @Autowired
 	private PriceRepository priceRepository;
 
     @Override
@@ -20,4 +18,9 @@ public class PriceRepositoryAdapter implements PriceDatabasePort {
         return priceRepository.findByBrandIdAndProductIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
                 brandId, productId, applicationDate, applicationDate);
     }
+    
+    @Autowired
+    public void setPriceRepository(PriceRepository priceRepository) {
+		this.priceRepository = priceRepository;
+	}
 }

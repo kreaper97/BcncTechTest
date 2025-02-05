@@ -17,7 +17,6 @@ import java.util.Optional;
 @RequestMapping("/prices")
 public class PriceController {
 
-    @Autowired
     private PriceService priceService;
 
     @GetMapping
@@ -32,6 +31,11 @@ public class PriceController {
 
         Optional<PriceResponseDTO> price = priceService.findApplicablePrice(applicationDate, productId, brandId);
         return price.map(ResponseEntity::ok)
-                    .orElseThrow(() -> new PriceNotFoundException());
+                    .orElseThrow(PriceNotFoundException::new);
     }
+    
+    @Autowired
+    public void setPriceService(PriceService priceService) {
+		this.priceService = priceService;
+	}
 }

@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class PriceServiceUnitTest {
+class PriceServiceUnitTest {
 
     @Mock
     private GetApplicablePriceUCPort getApplicablePriceUCPort;
@@ -27,7 +27,7 @@ public class PriceServiceUnitTest {
     private PriceService priceService;
 
     @Test
-    public void testFindApplicablePrice() {
+    void testFindApplicablePrice() {
         LocalDateTime applicationDate = LocalDateTime.of(2020, 6, 14, 10, 0);
         Long productId = 35455L;
         Long brandId = 1L;

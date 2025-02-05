@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class BCNCExceptionHandler {
 
     @ExceptionHandler(PriceNotFoundException.class)
-    public ResponseEntity<?> handlePriceNotFoundException(PriceNotFoundException ex, WebRequest request) {
+    public ResponseEntity<ErrorDetailsDTO> handlePriceNotFoundException(PriceNotFoundException ex, WebRequest request) {
     	
     	ErrorDetailsDTO errorDetailsDTO = new ErrorDetailsDTO();
     	errorDetailsDTO.setTimestamp(LocalDateTime.now());
@@ -27,7 +27,7 @@ public class BCNCExceptionHandler {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
+    public ResponseEntity<ErrorDetailsDTO> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
     	
     	ErrorDetailsDTO errorDetailsDTO = new ErrorDetailsDTO();
     	errorDetailsDTO.setTimestamp(LocalDateTime.now());
@@ -39,7 +39,7 @@ public class BCNCExceptionHandler {
     }
     
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<?> handleMissingParams(MissingServletRequestParameterException ex) {
+    public ResponseEntity<ErrorDetailsDTO> handleMissingParams(MissingServletRequestParameterException ex) {
     	ErrorDetailsDTO errorDetailsDTO = new ErrorDetailsDTO();
     	errorDetailsDTO.setTimestamp(LocalDateTime.now());
     	errorDetailsDTO.setStatus(HttpStatus.BAD_REQUEST.value());
