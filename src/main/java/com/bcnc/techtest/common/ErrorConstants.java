@@ -2,9 +2,7 @@ package com.bcnc.techtest.common;
 
 public class ErrorConstants{
 	
-	private ErrorConstants() {
-        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
-    }
+	private ErrorConstants() {}
 	
 	public static final String ERROR_PARAM_NULL= "Application Date, Product ID and Brand ID cannot be null";
 	public static final String ERROR_REQUIRED_PARAM = "Required request parameter";

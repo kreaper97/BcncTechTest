@@ -54,15 +54,13 @@ class PriceControllerIntegrationTest {
         		url, 
         		Object.class);
         
-    	try {
-            // Deserializar el LinkedHashMap al PriceResponseDTO (Si no se puede es que la estructura es distinta a este DTO)
-    		PriceResponseDTO priceResponseDTO = objectMapper.convertValue(response.getBody(), PriceResponseDTO.class);
-            
-    		assertEquals(200, response.getStatusCode().value());
-            assertEquals(expectedPrice, priceResponseDTO.getPrice(), 0.01);
-    	} catch (Exception e) {
-    		fail("Expected PriceResponseDTO: " + e.getMessage());
-    	}
+    	
+        // Deserializar el LinkedHashMap al PriceResponseDTO (Si no se puede es que la estructura es distinta a este DTO)
+		PriceResponseDTO priceResponseDTO = objectMapper.convertValue(response.getBody(), PriceResponseDTO.class);
+        
+		assertEquals(200, response.getStatusCode().value());
+        assertEquals(expectedPrice, priceResponseDTO.getPrice(), 0.01);
+    	
     
     }
     
@@ -117,15 +115,13 @@ class PriceControllerIntegrationTest {
         // Verificamos que el código de estado sea 404
         assertEquals(404, response.getStatusCode().value());
 
-    	try {
-            // Deserializar el LinkedHashMap al ErrorDetailsDTO (Si no se puede es que la estructura es distinta a este DTO)
-    		ErrorDetailsDTO errorDetails = objectMapper.convertValue(response.getBody(), ErrorDetailsDTO.class);
-            
-            assertEquals(ErrorConstants.ERROR_NOT_FOUND, errorDetails.getError());
-            assertEquals(ErrorConstants.ERROR_PRICE_NOT_FOUND, errorDetails.getMessage());
-    	} catch (Exception e) {
-    		fail("Expected ErrorDetailsDTO: " + e.getMessage());
-    	}
+    	
+        // Deserializar el LinkedHashMap al ErrorDetailsDTO (Si no se puede es que la estructura es distinta a este DTO)
+		ErrorDetailsDTO errorDetails = objectMapper.convertValue(response.getBody(), ErrorDetailsDTO.class);
+        
+        assertEquals(ErrorConstants.ERROR_NOT_FOUND, errorDetails.getError());
+        assertEquals(ErrorConstants.ERROR_PRICE_NOT_FOUND, errorDetails.getMessage());
+    	
     }
     
 	@Test
@@ -146,15 +142,13 @@ class PriceControllerIntegrationTest {
         // Verificamos que el código de estado sea 400 (Bad Request)
         assertEquals(400, response.getStatusCode().value());
 
-    	try {
-            // Deserializar el LinkedHashMap al ErrorDetailsDTO (Si no se puede es que la estructura es distinta a este DTO)
-    		ErrorDetailsDTO errorDetails = objectMapper.convertValue(response.getBody(), ErrorDetailsDTO.class);
-            
-            assertEquals(ErrorConstants.ERROR_BAD_REQUEST, errorDetails.getError());
-            assertTrue(errorDetails.getMessage().contains(ErrorConstants.ERROR_REQUIRED_PARAM));
-    	} catch (Exception e) {
-    		fail("Expected ErrorDetailsDTO: " + e.getMessage());
-    	}
+    	
+        // Deserializar el LinkedHashMap al ErrorDetailsDTO (Si no se puede es que la estructura es distinta a este DTO)
+		ErrorDetailsDTO errorDetails = objectMapper.convertValue(response.getBody(), ErrorDetailsDTO.class);
+        
+        assertEquals(ErrorConstants.ERROR_BAD_REQUEST, errorDetails.getError());
+        assertTrue(errorDetails.getMessage().contains(ErrorConstants.ERROR_REQUIRED_PARAM));
+    	
     }
     
 	@Test
@@ -165,15 +159,13 @@ class PriceControllerIntegrationTest {
 
         assertEquals(400, response.getStatusCode().value());
         
-    	try {
-            // Deserializar el LinkedHashMap al ErrorDetailsDTO (Si no se puede es que la estructura es distinta a este DTO)
-    		ErrorDetailsDTO errorDetails = objectMapper.convertValue(response.getBody(), ErrorDetailsDTO.class);
-            
-            assertEquals(ErrorConstants.ERROR_BAD_REQUEST, errorDetails.getError());
-            assertTrue(errorDetails.getMessage().contains(ErrorConstants.ERROR_REQUIRED_PARAM));
-    	} catch (Exception e) {
-    		fail("Expected ErrorDetailsDTO: " + e.getMessage());
-    	}
+    	
+        // Deserializar el LinkedHashMap al ErrorDetailsDTO (Si no se puede es que la estructura es distinta a este DTO)
+		ErrorDetailsDTO errorDetails = objectMapper.convertValue(response.getBody(), ErrorDetailsDTO.class);
+        
+        assertEquals(ErrorConstants.ERROR_BAD_REQUEST, errorDetails.getError());
+        assertTrue(errorDetails.getMessage().contains(ErrorConstants.ERROR_REQUIRED_PARAM));
+    	
     }
 
 }
