@@ -8,6 +8,10 @@
 		<version>3.4.2</version>
 		<relativePath/>
 	</parent>
+	<properties>
+	  <sonar.organization>kreaper97</sonar.organization>
+	  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+	</properties>
 	<groupId>com.bcnc</groupId>
 	<artifactId>techtest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
