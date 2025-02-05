@@ -13,6 +13,7 @@ Este es un servicio Spring Boot que proporciona un endpoint REST para consultar 
 - Spring Data - JPA (Java Persistence API)
 - Jacoco (Cobertura de Código)
 - JUnit 5 y Mockito (Pruebas Unitarias y de Integración)
+- SonarQube (Report)
 
 ## Patrones
 
